@@ -39,6 +39,8 @@ def login():
     """
     Login route to authenticate a user and store their session.
     """
+    theme = 'dark'  # Default theme for the login page
+
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -47,13 +49,10 @@ def login():
             return redirect(url_for('home'))  # Redirect to home after successful login
         else:
             return "Invalid credentials! Try again."
-    return '''
-        <form method="post" action="/login">
-            Username: <input type="text" name="username"><br>
-            Password: <input type="password" name="password"><br>
-            <input type="submit" value="Login">
-        </form>
-    '''
+
+    # Render the login form with the default theme
+    return render_template('login.html', theme=theme)
+
 
 @app.route('/logout')
 def logout():
@@ -109,28 +108,6 @@ def get_plants():
 
 @app.route('/view/<table_name>')
 def view_table(table_name):
-    """
-    Display all records from a selected table.
-    Requires user to be logged in.
-    """
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    try:
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute(f"SELECT * FROM {table_name}")
-        rows = cursor.fetchall()
-
-        # Get column names for the table
-        cursor.execute(f"PRAGMA table_info({table_name})")
-        columns = [col[1] for col in cursor.fetchall()]
-
-        return render_template('view.html', table_name=table_name, records=rows, columns=columns)
-    except sqlite3.OperationalError as e:
-        return jsonify({"error": f"Could not access table '{table_name}': {str(e)}"}), 400
-
-@app.route('/preferences', methods=['GET', 'POST'])
-def preferences():
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -138,22 +115,49 @@ def preferences():
     db = get_db()
     cursor = db.cursor()
 
+    # Fetch theme preference
+    cursor.execute("SELECT theme FROM user_preferences WHERE username = ?", (username,))
+    preference = cursor.fetchone()
+    theme = preference['theme'] if preference else 'dark'
+
+    # Fetch records and columns
+    cursor.execute(f"SELECT * FROM {table_name}")
+    rows = cursor.fetchall()
+    cursor.execute(f"PRAGMA table_info({table_name})")
+    columns = [col[1] for col in cursor.fetchall()]
+
+    return render_template('view.html', table_name=table_name, records=rows, columns=columns, theme=theme)
+
+@app.route('/preferences', methods=['GET', 'POST'])
+def preferences():
+    """
+    User preferences page for changing theme settings.
+    """
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    db = get_db()
+    cursor = db.cursor()
+    username = session['username']
+
     if request.method == 'POST':
-        theme = request.form.get('theme', 'dark')
+        # Update theme preference
+        theme = request.form.get('theme', 'dark')  # Default to 'dark' if no theme selected
         cursor.execute(
             "INSERT INTO user_preferences (username, theme) VALUES (?, ?) "
             "ON CONFLICT(username) DO UPDATE SET theme = ?",
             (username, theme, theme)
         )
         db.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('preferences'))
 
-    # Fetch the user's current preferences
+    # Fetch the current theme preference for the user
     cursor.execute("SELECT theme FROM user_preferences WHERE username = ?", (username,))
     preference = cursor.fetchone()
     current_theme = preference['theme'] if preference else 'dark'
 
-    return render_template('preferences.html', current_theme=current_theme)
+    return render_template('preferences.html', current_theme=current_theme, theme=current_theme)
+
 
 
 @app.route('/add/<table_name>', methods=['GET', 'POST'])
@@ -164,14 +168,21 @@ def add_record(table_name):
     """
     if 'username' not in session:
         return redirect(url_for('login'))
+    
     db = get_db()
     cursor = db.cursor()
 
+    # Fetch theme preference for the logged-in user
+    username = session['username']
+    cursor.execute("SELECT theme FROM user_preferences WHERE username = ?", (username,))
+    preference = cursor.fetchone()
+    theme = preference['theme'] if preference else 'dark'
+
     if request.method == 'POST':
-        # Get form data
+        # Get form data from the user
         data = {key: value for key, value in request.form.items()}
 
-        # Prepare INSERT query
+        # Prepare and execute the INSERT query
         placeholders = ", ".join(["?"] * len(data))
         columns = ", ".join(data.keys())
         values = list(data.values())
@@ -180,10 +191,12 @@ def add_record(table_name):
         db.commit()
         return redirect(url_for('view_table', table_name=table_name))
 
-    # For GET: Fetch table column names to generate the form
+    # Fetch column names to generate the form dynamically
     cursor.execute(f"PRAGMA table_info({table_name})")
     columns = [col[1] for col in cursor.fetchall()]
-    return render_template('add.html', table_name=table_name, columns=columns)
+    
+    return render_template('add.html', table_name=table_name, columns=columns, theme=theme)
+
 
 @app.route('/delete/<table_name>/<column>/<value>', methods=['POST'])
 def delete_record(table_name, column, value):
