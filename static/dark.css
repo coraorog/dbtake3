@@ -1,0 +1,167 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Roboto', sans-serif; /* Clean and modern font */
+    background-color: #1e1e2f; /* Dark slate background for contrast */
+    color: #e0e0e0; /* Light gray text for better readability */
+    line-height: 1.8;
+    padding: 20px;
+    background-image: radial-gradient(circle, #2a2a40, #1e1e2f);
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content container */
+main {
+    flex: 1; /* Push footer to the bottom */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+h1 {
+    color: #7ad1f9; /* Cool aqua blue */
+    font-size: 3rem; /* Bold and striking */
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+}
+
+h2 {
+    color: #94fbc7; /* Soothing mint green */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Links Styling */
+a {
+    color: #7ad1f9; /* Aqua blue for links */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: #94fbc7; /* Light mint green on hover */
+    text-shadow: 0 2px 6px rgba(122, 209, 249, 0.5); /* Subtle glow */
+}
+
+/* Layout for available tables */
+ul {
+    display: flex;
+    flex-wrap: wrap; /* Wrap items to the next row */
+    justify-content: center; /* Center items */
+    gap: 20px; /* Spacing between items */
+    margin-top: 20px;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+    width: calc(30% - 20px); /* Make cards responsive */
+    max-width: 300px;
+    padding: 15px 25px;
+    background-color: #2a2a40; /* Sleek dark background */
+    color: #ffffff;
+    border-radius: 12px; /* Smooth rounded edges */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4); /* Modern shadow */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    text-align: center; /* Center-align content */
+}
+
+ul li:hover {
+    background-color: #3b3b54; /* Slightly brighter on hover */
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* Table Container */
+.table-container {
+    margin-top: 30px;
+    overflow-x: auto; /* Handle large tables on smaller screens */
+    border-radius: 10px; /* Rounded container for the table */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2a2a40; /* Dark background */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* For clean edges */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Elevated table */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #3b3b54; /* Subtle border */
+    font-size: 1rem;
+    color: #e0e0e0; /* Light text */
+}
+
+th {
+    background-color: #3b3b54; /* Sleek header color */
+    color: #ffffff; /* White text */
+    font-weight: bold;
+    text-align: center;
+}
+
+td {
+    background-color: #252536; /* Dark cell background */
+}
+
+td:hover {
+    background-color: #33334a; /* Highlighted cell on hover */
+}
+
+/* Button Styling */
+button {
+    background-color: #7ad1f9;
+    color: #1e1e2f; /* Dark text for contrast */
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(122, 209, 249, 0.3); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 20px auto;
+    display: block; /* Center-align button */
+}
+
+button:hover {
+    background-color: #94fbc7; /* Mint green on hover */
+    transform: scale(1.05); /* Slight pop effect */
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2a2a40; /* Dark footer background */
+    color: #94fbc7; /* Mint green text */
+    font-size: 1rem;
+    border-top: 2px solid #3b3b54;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3); /* Shadow above the footer */
+}
+
+footer a {
+    color: #7ad1f9; /* Aqua blue for footer links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffffff; /* Bright white on hover */
+}
+

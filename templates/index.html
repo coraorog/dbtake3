@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Tables</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename=theme ~ '.css') }}">
+</head>
+<body>
+    {% if username %}
+    <p>Welcome, {{ username }}! <a href="/logout">Logout</a> | <a href="/preferences">Preferences</a></p>
+    {% else %}
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+    <h1>Welcome to the Plant Store Database</h1>
+    <h2>Available Tables</h2>
+    <ul>
+        {% for table in tables %}
+        <li><a href="/view/{{ table }}">{{ table }}</a></li>
+        {% endfor %}
+    </ul>
+    <button id="fetchFactButton">Get a Plant Fact</button>
+    <div id="plant-fact">
+        <h3>Random Plant Fact:</h3>
+        <p id="fact">Click the button to see a plant fact!</p>
+    </div>
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

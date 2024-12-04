@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preferences</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename=theme ~ '.css') }}">
+</head>
+<body>
+    <h1>Theme Preferences</h1>
+    <form method="post">
+        <label for="theme">Choose your theme:</label>
+        <select name="theme" id="theme">
+            <option value="light" {% if current_theme == 'light' %}selected{% endif %}>Light</option>
+            <option value="dark" {% if current_theme == 'dark' %}selected{% endif %}>Dark</option>
+        </select>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

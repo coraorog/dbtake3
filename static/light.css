@@ -1,0 +1,175 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Roboto', sans-serif; /* Clean and modern font */
+    background-color: #dff0d8; /* Soft green background */
+    color: #2c3e50; /* Dark slate text */
+    line-height: 1.8;
+    padding: 20px;
+    background-image: radial-gradient(circle, #d4edda, #c8e6c9); /* Green gradient background */
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content container */
+main {
+    flex: 1; /* Push footer to the bottom */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for content */
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* Hide anything spilling over edges */
+}
+
+/* Header Styling */
+h1 {
+    color: #27ae60; /* Vibrant green */
+    font-size: 3rem; /* Bold and striking */
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+h2 {
+    color: #2ecc71; /* Softer green */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Links Styling */
+a {
+    color: #27ae60; /* Vibrant green */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: #2ecc71; /* Softer green on hover */
+    text-shadow: 0 2px 6px rgba(39, 174, 96, 0.5); /* Subtle glow */
+}
+
+/* Layout for available tables */
+ul {
+    display: flex;
+    flex-wrap: wrap; /* Wrap items to the next row */
+    justify-content: center; /* Center items */
+    gap: 20px; /* Spacing between items */
+    margin-top: 20px;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+    width: calc(30% - 20px); /* Make cards responsive */
+    max-width: 300px;
+    padding: 20px;
+    background-color: #ffffff; /* White card background */
+    color: #2c3e50; /* Dark slate text */
+    border-radius: 15px; /* Smooth rounded edges */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Modern shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    text-align: center; /* Center-align content */
+}
+
+ul li:hover {
+    background-color: #eafaf1; /* Light green on hover */
+    transform: scale(1.05); /* Subtle zoom effect */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+/* Table Container */
+.table-container {
+    margin-top: 30px;
+    overflow-x: auto; /* Handle large tables on smaller screens */
+    border-radius: 10px; /* Rounded container for the table */
+    padding: 10px;
+    background-color: #f9fdf9; /* Very light green background */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* For clean edges */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #e0e0e0; /* Light border */
+    font-size: 1rem;
+    color: #2c3e50; /* Dark slate text */
+}
+
+th {
+    background-color: #27ae60; /* Green header */
+    color: #ffffff; /* White text */
+    font-weight: bold;
+    text-align: center;
+}
+
+td {
+    background-color: #f9fdf9; /* Light green cells */
+}
+
+td:hover {
+    background-color: #eafaf1; /* Slightly darker green on hover */
+}
+
+/* Button Styling */
+button {
+    background-color: #27ae60;
+    color: #ffffff; /* White text for contrast */
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 20px auto;
+    display: block; /* Center-align button */
+}
+
+button:hover {
+    background-color: #2ecc71; /* Softer green on hover */
+    transform: scale(1.05); /* Slight pop effect */
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff; /* White footer background */
+    color: #2ecc71; /* Softer green text */
+    font-size: 1rem;
+    border-top: 2px solid #e0e0e0; /* Subtle border */
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow above */
+}
+
+footer a {
+    color: #27ae60; /* Vibrant green for footer links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #2c3e50; /* Darker text on hover */
+}
+
